@@ -6,8 +6,14 @@ package frc.robot;
 
 import frc.robot.Constants.Controle;
 import frc.robot.Constants.Trajetoria;
+import frc.robot.commands.ColetorCmd;
+import frc.robot.commands.GanchoCmd;
+import frc.robot.commands.LancadorCmd;
 import frc.robot.commands.Teleop;
 import frc.robot.subsystems.SwerveSubsystem;
+import frc.robot.subsystems.Intake.Coletor;
+import frc.robot.subsystems.Intake.Gancho;
+import frc.robot.subsystems.Intake.Lancador;
 
 import java.io.File;
 
@@ -15,6 +21,7 @@ import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -24,9 +31,21 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // Aqui iniciamos o swerve
   private SwerveSubsystem swerve = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
+
+
+  // Aqui é onde chamamos o subsystem de cada parte do intake
+  public static final Coletor cSubsystem = new Coletor();
+  public static final Gancho gSubsystem = new Gancho();
+  public static final Lancador lSubsystem = new Lancador();
+
+  // Aqui é onde chamaremos os commands de cada parte do intake
+  public static final ColetorCmd cCommand = new ColetorCmd(cSubsystem);
+  public static final GanchoCmd gCommand = new GanchoCmd(gSubsystem);
+  public static final LancadorCmd lCommand = new LancadorCmd(lSubsystem);
   
   // Controle de Xbox, troque para o qual sua equipe estará utilizando
   private XboxController controleXbox = new XboxController(Controle.xboxControle);
+  public static final Joystick operatorControl = new Joystick(Controle.controle2);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -57,6 +76,15 @@ public class RobotContainer {
     // Colocar os comandos definidos no PathPlanner 2024 da seguinte forma 
     NamedCommands.registerCommand("Intake", new PrintCommand("Intake"));
 
+    cCommand.addRequirements(cSubsystem);
+    cSubsystem.setDefaultCommand(cCommand);
+
+    gCommand.addRequirements(gSubsystem);
+    gSubsystem.setDefaultCommand(gCommand);
+
+    lCommand.addRequirements(lSubsystem);
+    lSubsystem.setDefaultCommand(lCommand);
+
     // Configure the trigger bindings
     configureBindings();
   }
@@ -64,7 +92,6 @@ public class RobotContainer {
   // Função onde os eventos (triggers) são configurados
   private void configureBindings() {
     // Botão para resetar o gyro do robô
-    // Ao apertar A ele redefine a frente do campo
     new JoystickButton(controleXbox, XboxController.Button.kA.value).onTrue(new InstantCommand(swerve::zeroGyro));
   }
 

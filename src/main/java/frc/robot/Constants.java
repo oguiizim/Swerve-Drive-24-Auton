@@ -58,13 +58,41 @@ public final class Constants {
       public static final PIDFConfig angleAutoPID = new PIDFConfig(0.1, 0, 0.01);
     }
 
+    public static final class Motors {
+      public static final int coletor1 = 9;
+      public static final int coletor2 = 10;
+
+      public static final int lancador1 = 11;
+      public static final int lancador2 = 12;
+      public static final int lancador3 = 13;
+
+      public static final int gancho = 14;
+    }
+
     // Contem a porta em que o controle está
     public static final class Controle {
-      // Porta do controle
+      // Porta dos controles
       public static final int xboxControle = 0;
+      public static final int controle2 = 1;
       
       // Deadband do controle
       public static final double DEADBAND = 0.2;
+
+      // Eixos do controle
+      public static final int xLeftAxis = 0;
+      public static final int yLeftAxis = 1;
+      public static final int leftTrigger = 2;
+      public static final int rightTrigger = 3;
+      public static final int xRightAxix = 4;
+      public static final int yRightAxis = 5;
+
+      // Botões do controle
+      public static final int kA = 0;
+      public static final int kB = 1;
+      public static final int kX = 2;
+      public static final int kY = 3;
+      public static final int kLB = 4;
+      public static final int kRB = 5;
     }
 
     public static final class Tracao {
@@ -89,6 +117,12 @@ public final class Constants {
       public static final double dt = 0.02;
 
       public static final double constantRotation = 4;
+
+      // Velocidade de cada parte do intake
+      public static final double coletorSpd = 1;
+      public static final double ganhcoSpd = 0.5;
+      public static final double lancadorSpd = 1;
+
     }
 
     // Classe que guarda os nomes das trajetórias
