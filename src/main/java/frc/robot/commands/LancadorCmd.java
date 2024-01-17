@@ -8,6 +8,8 @@ import frc.robot.subsystems.Intake.Lancador;
 public class LancadorCmd extends Command{
     Lancador lancador;
 
+    double speed;
+
     public LancadorCmd(Lancador subsystem){
         lancador = subsystem;
 
@@ -21,7 +23,7 @@ public class LancadorCmd extends Command{
 
     @Override
     public void execute(){
-        lancador.shooterFwd(RobotContainer.operatorControl, Constants.Tracao.lancadorSpd);
+        lancador.shooterFwd(RobotContainer.operatorControl, speed);
     }
 
     @Override

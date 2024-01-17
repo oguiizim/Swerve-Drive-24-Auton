@@ -24,9 +24,13 @@ public class Coletor extends SubsystemBase{
     }
 
     public void collectWithA(Joystick operatorControl, double speed){
-        if(operatorControl.getRawButtonPressed(0)){
+        if(operatorControl.getRawButton(1)){
             coletor1.set(1);
             coletor2.set(1);
+        }
+        else{
+            coletor1.set(0);
+            coletor2.set(0);
         }
         this.speed = speed;
     }

@@ -23,11 +23,14 @@ public class Gancho extends SubsystemBase{
     }
 
     public void escalatorVelocity(Joystick operatorControl, double speed){
-        if(operatorControl.getRawButtonPressed(Controle.kRB)){
+        if(operatorControl.getRawButton(Controle.kRB)){
             gancho.set(0.5);
         }
-        else if(operatorControl.getRawButtonPressed(Controle.kRB)){
+        else if(operatorControl.getRawButton(Controle.kLB)){
             gancho.set(-0.5);
+        }
+        else{
+            gancho.stopMotor();
         }
         this.speed = speed;
     }

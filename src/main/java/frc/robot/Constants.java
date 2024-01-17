@@ -87,12 +87,12 @@ public final class Constants {
       public static final int yRightAxis = 5;
 
       // Botões do controle
-      public static final int kA = 0;
-      public static final int kB = 1;
-      public static final int kX = 2;
-      public static final int kY = 3;
-      public static final int kLB = 4;
-      public static final int kRB = 5;
+      public static final int kA = 1;
+      public static final int kB = 2;
+      public static final int kX = 3;
+      public static final int kY = 4;
+      public static final int kLB = 5;
+      public static final int kRB = 6;
     }
 
     public static final class Tracao {
