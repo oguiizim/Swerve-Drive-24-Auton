@@ -92,7 +92,6 @@ public final class Constants {
     }
 
     // Classe que guarda os nomes das trajetórias
-    // Cada constante é referente a um spot no campo para o auto
     public static final class Trajetoria {
       public static final boolean ALIANCA = false; // Caso a aliança seja azul use false, se for vermelha use true
       public static final String NOME_TRAJETORIA = "New Auto";
