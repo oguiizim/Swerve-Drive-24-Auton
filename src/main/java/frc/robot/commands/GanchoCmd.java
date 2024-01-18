@@ -1,13 +1,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Intake.Gancho;
 
 public class GanchoCmd extends Command{
 
     Gancho gancho;
+
+    double speed;
 
     public GanchoCmd(Gancho subsystem){
         gancho = subsystem;
@@ -22,7 +23,7 @@ public class GanchoCmd extends Command{
 
     @Override
     public void execute(){
-        gancho.escalatorVelocity(RobotContainer.operatorControl, Constants.Tracao.ganhcoSpd);
+        gancho.escalatorVelocity(RobotContainer.operatorControl, speed);
     }
 
     @Override

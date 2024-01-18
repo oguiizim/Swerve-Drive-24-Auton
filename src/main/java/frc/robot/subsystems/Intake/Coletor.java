@@ -7,6 +7,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.Controle;
 import frc.robot.Constants.Motors;
 
 public class Coletor extends SubsystemBase{
@@ -24,7 +25,7 @@ public class Coletor extends SubsystemBase{
     }
 
     public void collectWithA(Joystick operatorControl, double speed){
-        if(operatorControl.getRawButton(1)){
+        if(operatorControl.getRawButton(Controle.kA)){
             coletor1.set(1);
             coletor2.set(1);
         }

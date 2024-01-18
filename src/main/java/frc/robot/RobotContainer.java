@@ -32,7 +32,6 @@ public class RobotContainer {
   // Aqui iniciamos o swerve
   private SwerveSubsystem swerve = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
 
-
   // Aqui é onde chamamos o subsystem de cada parte do intake
   public static final Coletor cSubsystem = new Coletor();
   public static final Gancho gSubsystem = new Gancho();
@@ -43,11 +42,10 @@ public class RobotContainer {
   public static final GanchoCmd gCommand = new GanchoCmd(gSubsystem);
   public static final LancadorCmd lCommand = new LancadorCmd(lSubsystem);
   
-  // Controle de Xbox, troque para o qual sua equipe estará utilizando
+  // Controles
   private XboxController controleXbox = new XboxController(Controle.xboxControle);
   public static final Joystick operatorControl = new Joystick(Controle.controle2);
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
     // Definimos o comando padrão como a tração

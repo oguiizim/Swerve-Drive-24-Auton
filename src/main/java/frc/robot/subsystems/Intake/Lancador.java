@@ -31,7 +31,7 @@ public class Lancador extends SubsystemBase{
         lancador1.set(operatorControl.getRawAxis(Controle.rightTrigger)*speed);
         lancador2.set(operatorControl.getRawAxis(Controle.rightTrigger)*speed);
 
-        if(operatorControl.getRawButton(2)){
+        if(operatorControl.getRawButton(Controle.kB)){
             lancadorMeio.set(1);
         }else{
             lancadorMeio.stopMotor();
