@@ -35,6 +35,10 @@ public class Gancho extends SubsystemBase{
         this.speed = speed;
     }
 
+    public void escalatorFwd(Joystick operatorControl, double speed){
+    
+    }
+
     public void stop(){
         gancho.stopMotor();
     }

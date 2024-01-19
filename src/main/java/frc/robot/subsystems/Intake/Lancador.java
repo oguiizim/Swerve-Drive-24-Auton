@@ -25,6 +25,8 @@ public class Lancador extends SubsystemBase {
         lancador1.setIdleMode(IdleMode.kBrake);
         lancador2.setIdleMode(IdleMode.kBrake);
         lancadorMeio.setIdleMode(IdleMode.kBrake);
+
+        lancador1.follow(lancador2);
     }
 
     public void shooterMax(Joystick operatorControl, double speed) {
