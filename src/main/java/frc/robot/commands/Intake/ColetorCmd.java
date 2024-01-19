@@ -1,29 +1,30 @@
-package frc.robot.commands;
+package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.Intake.Gancho;
+import frc.robot.Constants.Tracao;
+import frc.robot.subsystems.Intake.Coletor;
 
-public class GanchoCmd extends Command{
+public class ColetorCmd extends Command{
 
-    Gancho gancho;
+    Coletor coletor;
 
     double speed;
 
-    public GanchoCmd(Gancho subsystem){
-        gancho = subsystem;
+    public ColetorCmd(Coletor subsystem){
+        coletor = subsystem;
 
         addRequirements(subsystem);
     }
 
     @Override
     public void initialize(){
-        RobotContainer.gSubsystem.stop();
+        RobotContainer.cSubsystem.stop();
     }
 
     @Override
     public void execute(){
-        gancho.escalatorVelocity(RobotContainer.operatorControl, speed);
+        coletor.collectWithA(RobotContainer.operatorControl, Tracao.coletorSpd);
     }
 
     @Override

@@ -10,14 +10,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Controle;
 import frc.robot.Constants.Motors;
 
-public class Lancador extends SubsystemBase{
+public class Lancador extends SubsystemBase {
     CANSparkMax lancador1;
     CANSparkMax lancador2;
     CANSparkMax lancadorMeio;
-    
+
     double speed;
 
-    public Lancador(){
+    public Lancador() {
         lancador1 = new CANSparkMax(Motors.lancador1, MotorType.kBrushless);
         lancador2 = new CANSparkMax(Motors.lancador2, MotorType.kBrushless);
         lancadorMeio = new CANSparkMax(Motors.lancador3, MotorType.kBrushless);
@@ -27,26 +27,43 @@ public class Lancador extends SubsystemBase{
         lancadorMeio.setIdleMode(IdleMode.kBrake);
     }
 
-    public void shooterFwd(Joystick operatorControl, double speed){
-        lancador1.set(operatorControl.getRawAxis(Controle.rightTrigger)*speed);
-        lancador2.set(operatorControl.getRawAxis(Controle.rightTrigger)*speed);
-
-        if(operatorControl.getRawButton(Controle.kB)){
-            lancadorMeio.set(1);
-        }else{
-            lancadorMeio.stopMotor();
+    public void shooterMax(Joystick operatorControl, double speed) {
+        if (operatorControl.getRawButton(Controle.kX)) {
+            lancador1.set(1);
+            lancador2.set(1);
+        } else {
+            lancador1.stopMotor();
+            lancador2.stopMotor();
         }
-        this.speed = speed;
     }
 
-    public void stop(){
+    public void shooterAmp(Joystick operatorControl, double speed) {
+        if(operatorControl.getRawButton(Controle.kY)){
+            lancador1.set(0.5);
+            lancador2.set(0.5);
+        } 
+        else {
+            lancador1.stopMotor();
+            lancador2.stopMotor();
+        }
+    }
+
+    public void shooterMid(Joystick operatorControl, double speed) {
+        if (operatorControl.getRawButton(Controle.kB)) {
+            lancadorMeio.set(1);
+        } else {
+            lancadorMeio.stopMotor();
+        }
+    }
+
+    public void stop() {
         lancador1.stopMotor();
         lancador2.stopMotor();
         lancadorMeio.stopMotor();
     }
 
     @Override
-    public void periodic(){
+    public void periodic() {
         SmartDashboard.putNumber("Lançador Speed", speed);
     }
 }

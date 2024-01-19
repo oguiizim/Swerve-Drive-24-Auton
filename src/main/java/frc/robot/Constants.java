@@ -121,7 +121,9 @@ public final class Constants {
       // Velocidade de cada parte do intake
       public static final double coletorSpd = 1;
       public static final double ganhcoSpd = 0.5;
-      public static final double lancadorSpd = 1;
+      public static final double lancadorMax = 1;
+      public static final double lancadorMid = 1;
+      public static final double lancadorAmp = 1;
 
     }
 
