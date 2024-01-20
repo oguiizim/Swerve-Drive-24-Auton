@@ -2,7 +2,6 @@ package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
-import frc.robot.Constants.Tracao;
 import frc.robot.subsystems.Intake.Coletor;
 
 public class ColetorCmd extends Command{
@@ -24,7 +23,7 @@ public class ColetorCmd extends Command{
 
     @Override
     public void execute(){
-        coletor.collectWithA(RobotContainer.operatorControl, Tracao.coletorSpd);
+        coletor.collectWithA(RobotContainer.operatorControl, speed);
     }
 
     @Override

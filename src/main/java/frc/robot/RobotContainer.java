@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.Constants.Controle;
+import frc.robot.Constants.Trajetoria;
 import frc.robot.commands.Teleop;
 import frc.robot.commands.Intake.ColetorCmd;
 import frc.robot.commands.Intake.GanchoCmd;
@@ -18,6 +19,7 @@ import java.io.File;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.pathplanner.lib.path.PathPlannerPath;
 
 import edu.wpi.first.math.MathUtil;
@@ -46,10 +48,9 @@ public class RobotContainer {
   public static final LancadorCmd lCommand = new LancadorCmd(lSubsystem);
 
   // Controles
-  private XboxController controleXbox = new XboxController(Controle.xboxControle);
+  public static final XboxController controleXbox = new XboxController(Controle.xboxControle);
   public static final Joystick operatorControl = new Joystick(Controle.controle2);
 
-  private final SendableChooser<Command> autoChooser;
 
   public RobotContainer() {
 
@@ -92,12 +93,9 @@ public class RobotContainer {
     lCommand.addRequirements(lSubsystem);
     lSubsystem.setDefaultCommand(lCommand);
 
+
     // Configure the trigger bindings
     configureBindings();
-
-    autoChooser = AutoBuilder.buildAutoChooser();
-
-    SmartDashboard.putData("Auto Chooser", autoChooser);
   }
 
   // Função onde os eventos (triggers) são configurados
@@ -108,14 +106,13 @@ public class RobotContainer {
 
   // Função que retorna o autônomo
   public Command getAutonomousCommand() {
-    // PathPlannerPath path = PathPlannerPath.fromPathFile("AutoTeste");
-    // return AutoBuilder.followPath(path);
 
-    return autoChooser.getSelected();
-    
+    return new PathPlannerAuto("AutoTeste");
+
     // Aqui retornamos o comando que está no selecionador
-    // return swerve.getAutonomousCommand(Trajetoria.NOME_TRAJETORIA, true);
-    // return autoChooser.getSelected();
+    // Feito pela StemOs
+    // return swerve.getAutonomousCommand(Trajetoria.NOME_TRAJETORIA, Trajetoria.ALIANCA, true);
+
   }
 
   // Define os motores como coast ou brake
