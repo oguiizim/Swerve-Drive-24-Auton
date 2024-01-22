@@ -5,7 +5,6 @@
 package frc.robot;
 
 import frc.robot.Constants.Controle;
-import frc.robot.Constants.Trajetoria;
 import frc.robot.commands.Teleop;
 import frc.robot.commands.Intake.ColetorCmd;
 import frc.robot.commands.Intake.GanchoCmd;
@@ -17,17 +16,12 @@ import frc.robot.subsystems.Intake.Lancador;
 
 import java.io.File;
 
-import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
-import com.pathplanner.lib.path.PathPlannerPath;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
@@ -102,6 +96,7 @@ public class RobotContainer {
   private void configureBindings() {
     // Botão para resetar o gyro do robô
     new JoystickButton(controleXbox, XboxController.Button.kA.value).onTrue(new InstantCommand(swerve::zeroGyro));
+    // new JoystickButton(operatorControl, 3).onTrue(() -> gSubsystem.)
   }
 
   // Função que retorna o autônomo
