@@ -11,56 +11,51 @@ import frc.robot.Constants.Controle;
 import frc.robot.Constants.Motors;
 
 public class Lancador extends SubsystemBase {
-    CANSparkMax lancador1;
-    CANSparkMax lancador2;
+    CANSparkMax lancadorUp;
+    CANSparkMax lancadorDown;
     CANSparkMax lancadorMeio;
 
     double speed;
 
     public Lancador() {
-        lancador1 = new CANSparkMax(Motors.lancador1, MotorType.kBrushless);
-        lancador2 = new CANSparkMax(Motors.lancador2, MotorType.kBrushless);
+        lancadorUp = new CANSparkMax(Motors.lancador2, MotorType.kBrushless);
+        lancadorDown = new CANSparkMax(Motors.lancador1, MotorType.kBrushless);
         lancadorMeio = new CANSparkMax(Motors.lancador3, MotorType.kBrushless);
 
-        lancador1.setIdleMode(IdleMode.kBrake);
-        lancador2.setIdleMode(IdleMode.kBrake);
+        lancadorUp.setIdleMode(IdleMode.kBrake);
+        lancadorDown.setIdleMode(IdleMode.kBrake);
         lancadorMeio.setIdleMode(IdleMode.kBrake);
 
-        lancador1.follow(lancador2);
+        lancadorDown.setInverted(true);
     }
 
-    public void shooterMax(Joystick operatorControl, double speed) {
-        if (operatorControl.getRawButton(Controle.kX)) {
-            lancador1.set(1);
-            lancador2.set(1);
-        } else {
-            lancador1.stopMotor();
-            lancador2.stopMotor();
-        }
-    }
+    public void shooter(Joystick operatorControl, double speed){
 
-    public void shooterAmp(Joystick operatorControl, double speed) {
-        if(operatorControl.getRawButton(Controle.kY)){
-            lancador1.set(0.5);
-            lancador2.set(0.5);
-        } 
-        else {
-            lancador1.stopMotor();
-            lancador2.stopMotor();
-        }
-    }
-
-    public void shooterMid(Joystick operatorControl, double speed) {
         if (operatorControl.getRawButton(Controle.kB)) {
             lancadorMeio.set(1);
-        } else {
+
+        }
+        else if(operatorControl.getRawButton(Controle.kY)){
+            lancadorUp.set(0.5);
+            lancadorDown.set(0.5);
+
+        }
+        else if(operatorControl.getRawButton(Controle.kX)){
+            lancadorUp.set(1);
+            lancadorDown.set(1);
+
+        }
+        else {
+            lancadorDown.stopMotor();
+            lancadorUp.stopMotor();
             lancadorMeio.stopMotor();
+
         }
     }
 
     public void stop() {
-        lancador1.stopMotor();
-        lancador2.stopMotor();
+        lancadorUp.stopMotor();
+        lancadorDown.stopMotor();
         lancadorMeio.stopMotor();
     }
 

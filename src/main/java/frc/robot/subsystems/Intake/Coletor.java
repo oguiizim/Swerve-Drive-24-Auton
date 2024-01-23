@@ -32,10 +32,10 @@ public class Coletor extends SubsystemBase{
             coletor1.set(1);
             coletor2.set(1);
         }
-        else if(operatorControl.getRawButton(Controle.kY)){
-            coletor1.set(-1);
-            coletor2.set(-1);
-        }
+        // else if(operatorControl.getRawButton(Controle.kY)){
+        //     coletor1.set(-1);
+        //     coletor2.set(-1);
+        // }
         else{
             coletor1.set(0);
             coletor2.set(0);
