@@ -16,6 +16,12 @@
           "data": {
             "pathName": "Path1"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Collect"
+          }
         }
       ]
     }

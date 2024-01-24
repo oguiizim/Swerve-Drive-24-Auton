@@ -26,23 +26,23 @@ public class Lancador extends SubsystemBase {
         lancadorDown.setIdleMode(IdleMode.kBrake);
         lancadorMeio.setIdleMode(IdleMode.kBrake);
 
-        lancadorDown.setInverted(true);
+        lancadorUp.setInverted(true);
     }
 
     public void shooter(Joystick operatorControl, double speed){
 
         if (operatorControl.getRawButton(Controle.kB)) {
-            lancadorMeio.set(1);
+            lancadorMeio.set(0.7);
 
         }
         else if(operatorControl.getRawButton(Controle.kY)){
-            lancadorUp.set(0.5);
-            lancadorDown.set(0.5);
+            lancadorUp.set(0.1);
+            lancadorDown.set(-0.1);
 
         }
         else if(operatorControl.getRawButton(Controle.kX)){
-            lancadorUp.set(1);
-            lancadorDown.set(1);
+            lancadorUp.set(0.6);
+            lancadorDown.set(-0.6);
 
         }
         else {
@@ -61,6 +61,6 @@ public class Lancador extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Lançador Speed", speed);
+        SmartDashboard.putNumber("Shooter Speed", speed);
     }
 }
