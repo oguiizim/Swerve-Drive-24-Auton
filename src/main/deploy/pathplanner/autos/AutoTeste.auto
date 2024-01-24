@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.5119508293583617,
-      "y": 6.4758981238009925
+      "x": 0.8400155353041616,
+      "y": 7.108880647182616
     },
     "rotation": 0
   },
@@ -21,6 +21,18 @@
           "type": "named",
           "data": {
             "name": "Collect"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "New Path"
           }
         }
       ]

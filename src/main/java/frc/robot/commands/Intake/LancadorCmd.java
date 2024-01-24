@@ -22,7 +22,7 @@ public class LancadorCmd extends Command{
 
     @Override
     public void execute(){
-        lancador.shooter(RobotContainer.operatorControl, speed);
+        lancador.shooter(RobotContainer.operatorControl);
     }
 
     @Override

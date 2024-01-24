@@ -5,7 +5,6 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Controle;
 import frc.robot.Constants.Motors;
@@ -29,28 +28,38 @@ public class Lancador extends SubsystemBase {
         lancadorUp.setInverted(true);
     }
 
-    public void shooter(Joystick operatorControl, double speed){
+    public void shooter(Joystick operatorControl) {
 
         if (operatorControl.getRawButton(Controle.kB)) {
             lancadorMeio.set(0.7);
 
-        }
-        else if(operatorControl.getRawButton(Controle.kY)){
+        } else if (operatorControl.getRawButton(Controle.kY)) {
             lancadorUp.set(0.1);
             lancadorDown.set(-0.1);
 
-        }
-        else if(operatorControl.getRawButton(Controle.kX)){
+        } else if (operatorControl.getRawButton(Controle.kX)) {
             lancadorUp.set(0.6);
             lancadorDown.set(-0.6);
-
-        }
-        else {
+        } else {
             lancadorDown.stopMotor();
             lancadorUp.stopMotor();
             lancadorMeio.stopMotor();
-
         }
+    }
+
+    public void shooterMidAuto() {
+        lancadorMeio.set(0.6);
+    }
+
+    public void shootMaxAuto() {
+        // lancadorMeio.set(0.1);
+        lancadorUp.set(0.8);
+        lancadorDown.set(-0.8);
+    }
+
+    public void shootAmpAuto() {
+        lancadorUp.set(0.6);
+        lancadorDown.set(-0.6);
     }
 
     public void stop() {
@@ -61,6 +70,6 @@ public class Lancador extends SubsystemBase {
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Shooter Speed", speed);
+        // SmartDashboard.putNumber("Shooter Speed", speed);
     }
 }
