@@ -18,6 +18,7 @@ import java.io.File;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Joystick;
@@ -30,15 +31,15 @@ import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class RobotContainer {
-  // Aqui iniciamos o swerve
+  // Inicialização da swerve
   private SwerveSubsystem swerve = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
 
-  // Aqui é onde chamamos o subsystem de cada parte do intake
+  // Inicialização dos subsystems
   public static final Coletor cSubsystem = new Coletor();
   public static final Gancho gSubsystem = new Gancho();
   public static final Lancador lSubsystem = new Lancador();
 
-  // Aqui é onde chamaremos os commands de cada parte do intake
+  // Inicialização dos commands
   public static final ColetorCmd cCommand = new ColetorCmd(cSubsystem);
   public static final GanchoCmd gCommand = new GanchoCmd(gSubsystem);
   public static final LancadorCmd lCommand = new LancadorCmd(lSubsystem);
@@ -51,50 +52,53 @@ public class RobotContainer {
   private final SendableChooser<Command> autoChooser;
 
   public RobotContainer() {
-
+    
     // Definimos o comando padrão como a tração
     swerve.setDefaultCommand(new Teleop(swerve,
-        // Aqui dentro temos vários inputs do nossos gamepad, estaremos passando a
-        // própria função pelo método,
-        // apenas preferência de sintaxe, o desempenho em si não se altera
-        () -> -MathUtil.applyDeadband(controleXbox.getLeftY(), Controle.DEADBAND),
-        () -> -MathUtil.applyDeadband(controleXbox.getLeftX(), Controle.DEADBAND),
-        () -> -MathUtil.applyDeadband(controleXbox.getRightX(), Controle.DEADBAND)));
-
+    // Aqui dentro temos vários inputs do nossos gamepad, estaremos passando a
+    // própria função pelo método,
+    // apenas preferência de sintaxe, o desempenho em si não se altera
+    () -> -MathUtil.applyDeadband(controleXbox.getLeftY(), Controle.DEADBAND),
+    () -> -MathUtil.applyDeadband(controleXbox.getLeftX(), Controle.DEADBAND),
+    () -> -MathUtil.applyDeadband(controleXbox.getRightX(), Controle.DEADBAND)));
+    
     /*
-     * AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
-     * () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
-     * Controle.DEADBAND),
-     * () -> -MathUtil.applyDeadband(driverXbox.getLeftY(),
-     * Controle.DEADBAND),
-     * () -> MathUtil.applyDeadband(driverXbox.getRightX(),
-     * Controle.DEADBAND),
-     * driverXbox::getYButtonPressed,
-     * driverXbox::getAButtonPressed,
-     * driverXbox::getXButtonPressed,
-     * driverXbox::getBButtonPressed);
-     */
-
+    * AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
+    * () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
+    * Controle.DEADBAND),
+    * () -> -MathUtil.applyDeadband(driverXbox.getLeftY(),
+    * Controle.DEADBAND),
+    * () -> MathUtil.applyDeadband(driverXbox.getRightX(),
+    * Controle.DEADBAND),
+    * driverXbox::getYButtonPressed,
+    * driverXbox::getAButtonPressed,
+    * driverXbox::getXButtonPressed,
+    * driverXbox::getBButtonPressed);
+    */
+    
     // Colocar os comandos definidos no PathPlanner 2024 da seguinte forma
-    NamedCommands.registerCommand("Intake", new PrintCommand("Intake"));
-    // NamedCommands.registerCommand("invertForward", new InvertMotors(driveTrain, true));
-    // NamedCommands.registerCommand("autoBalance", swerve.autoBalanceCommand());
-    // NamedCommands.registerCommand("exampleCommand",
-    // Lancador.shooterMax(RobotContainer.operatorControl, Tracao.lancadorMax));
-    // NamedCommands.registerCommand("someOtherCommand", new SomeOtherCommand());
-
+    
+    NamedCommands.registerCommand("collect", cSubsystem.collectAuto());
+    
+    // NamedCommands.registerCommand("Intake", new PrintCommand("Intake"));
+    
+    // NamedCommands.registerCommand("invertForward", new Command(Coletor, true));
+    
+    // NamedCommands.registerCommand("invertForward", new InvertMotors(driveTrain,true));
+    
     cCommand.addRequirements(cSubsystem);
     cSubsystem.setDefaultCommand(cCommand);
-
+    
     gCommand.addRequirements(gSubsystem);
     gSubsystem.setDefaultCommand(gCommand);
-
+    
     lCommand.addRequirements(lSubsystem);
     lSubsystem.setDefaultCommand(lCommand);
-
+    
     autoChooser = AutoBuilder.buildAutoChooser();
-
+    
     SmartDashboard.putData("Auto Chooser", autoChooser);
+    
     // Configure the trigger bindings
     configureBindings();
   }
@@ -112,7 +116,8 @@ public class RobotContainer {
     return autoChooser.getSelected();
 
     // Feito pela StemOs
-    // return swerve.getAutonomousCommand(Trajetoria.NOME_TRAJETORIA, Trajetoria.ALIANCA, true);
+    // return swerve.getAutonomousCommand(Trajetoria.NOME_TRAJETORIA,
+    // Trajetoria.ALIANCA, true);
 
   }
 

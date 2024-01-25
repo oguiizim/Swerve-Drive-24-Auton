@@ -5,6 +5,7 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Controle;
 import frc.robot.Constants.Motors;
@@ -34,32 +35,33 @@ public class Lancador extends SubsystemBase {
             lancadorMeio.set(0.7);
 
         } else if (operatorControl.getRawButton(Controle.kY)) {
-            lancadorUp.set(0.1);
-            lancadorDown.set(-0.1);
+            lancadorUp.set(0.23);
+            lancadorDown.set(0.23);
 
         } else if (operatorControl.getRawButton(Controle.kX)) {
-            lancadorUp.set(0.6);
-            lancadorDown.set(-0.6);
+            lancadorUp.set(0.55);
+            lancadorDown.set(0.55);
         } else {
             lancadorDown.stopMotor();
             lancadorUp.stopMotor();
             lancadorMeio.stopMotor();
         }
+        
     }
 
     public void shooterMidAuto() {
         lancadorMeio.set(0.6);
     }
 
+    public void shootAmpAuto() {
+        lancadorUp.set(0.23);
+        lancadorDown.set(0.23);
+    }
+    
     public void shootMaxAuto() {
         // lancadorMeio.set(0.1);
-        lancadorUp.set(0.8);
-        lancadorDown.set(-0.8);
-    }
-
-    public void shootAmpAuto() {
-        lancadorUp.set(0.6);
-        lancadorDown.set(-0.6);
+        lancadorUp.set(0.55);
+        lancadorDown.set(0.55);
     }
 
     public void stop() {

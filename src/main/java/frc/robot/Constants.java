@@ -99,6 +99,11 @@ public final class Constants {
     public static final int kY = 4;
     public static final int kLB = 5;
     public static final int kRB = 6;
+    public static final int kBack = 7;
+    public static final int kStart = 8;
+    public static final int kLeftAxisButton = 9;
+    public static final int kRightAxisButton = 10;
+
   }
 
   public static final class Tracao {

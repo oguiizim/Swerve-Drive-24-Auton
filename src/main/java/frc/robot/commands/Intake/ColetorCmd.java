@@ -23,7 +23,7 @@ public class ColetorCmd extends Command{
 
     @Override
     public void execute(){
-        coletor.collectWithA(RobotContainer.operatorControl, speed);
+        coletor.collectWithA(RobotContainer.operatorControl);
     }
 
     @Override
