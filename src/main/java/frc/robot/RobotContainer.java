@@ -53,6 +53,10 @@ public class RobotContainer {
 
   public RobotContainer() {
     
+    // cSubsystem = new Coletor();
+
+    // NamedCommands.registerCommand("collect", cSubsystem.collectAuto());
+    
     // Definimos o comando padrão como a tração
     swerve.setDefaultCommand(new Teleop(swerve,
     // Aqui dentro temos vários inputs do nossos gamepad, estaremos passando a
@@ -77,8 +81,6 @@ public class RobotContainer {
     */
     
     // Colocar os comandos definidos no PathPlanner 2024 da seguinte forma
-    
-    NamedCommands.registerCommand("collect", cSubsystem.collectAuto());
     
     // NamedCommands.registerCommand("Intake", new PrintCommand("Intake"));
     

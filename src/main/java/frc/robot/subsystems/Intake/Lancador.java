@@ -15,8 +15,6 @@ public class Lancador extends SubsystemBase {
     CANSparkMax lancadorDown;
     CANSparkMax lancadorMeio;
 
-    double speed;
-
     public Lancador() {
         lancadorUp = new CANSparkMax(Motors.lancador2, MotorType.kBrushless);
         lancadorDown = new CANSparkMax(Motors.lancador1, MotorType.kBrushless);
@@ -35,18 +33,18 @@ public class Lancador extends SubsystemBase {
             lancadorMeio.set(0.7);
 
         } else if (operatorControl.getRawButton(Controle.kY)) {
-            lancadorUp.set(0.23);
-            lancadorDown.set(0.23);
+            lancadorUp.set(0.10);
+            lancadorDown.set(0.40);
 
         } else if (operatorControl.getRawButton(Controle.kX)) {
-            lancadorUp.set(0.55);
-            lancadorDown.set(0.55);
+            lancadorUp.set(0.20);
+            lancadorDown.set(0.60);
         } else {
             lancadorDown.stopMotor();
             lancadorUp.stopMotor();
             lancadorMeio.stopMotor();
         }
-        
+
     }
 
     public void shooterMidAuto() {
@@ -57,7 +55,7 @@ public class Lancador extends SubsystemBase {
         lancadorUp.set(0.23);
         lancadorDown.set(0.23);
     }
-    
+
     public void shootMaxAuto() {
         // lancadorMeio.set(0.1);
         lancadorUp.set(0.55);

@@ -5,14 +5,12 @@
 package frc.robot.commands.Auto;
 
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
 import com.pathplanner.lib.util.ReplanningConfig;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.subsystems.SwerveSubsystem;
-import frc.robot.subsystems.Intake.Lancador;
 
 /** Add your docs here. */
 public class ConfigAuto {
