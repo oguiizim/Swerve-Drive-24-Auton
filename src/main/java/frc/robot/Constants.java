@@ -82,7 +82,7 @@ public final class Constants {
     public static final int controle2 = 1;
 
     // Deadband do controle
-    public static final double DEADBAND = 0.2;
+    public static final double DEADBAND = 0.1;
 
     // Eixos do controle
     public static final int xLeftAxis = 0;
@@ -107,7 +107,7 @@ public final class Constants {
   }
 
   public static final class Tracao {
-    // Define se a tração vai ser orientada ao campo (sim = true)
+    // Define se a tração vai ser orientada ao campo
     public static final boolean fieldRelative = true;
     // false para malha-fechada
     public static final boolean isOpenLoop = false;
@@ -117,9 +117,9 @@ public final class Constants {
     // 1)
     public static final double multiplicadorRotacional = 0.8;
     // constante para diminuir o input do joystick (y)
-    public static final double multiplicadorTranslacionalY = 0.7;
+    public static final double multiplicadorTranslacionalY = 0.9;
     // constante para diminuir o input do joystick (x)
-    public static final double multiplicadorTranslacionalX = 0.7;
+    public static final double multiplicadorTranslacionalX = 0.9;
 
     public static final double TURN_CONSTANT = 0.75;
 
@@ -142,7 +142,7 @@ public final class Constants {
   // Classe que guarda os nomes das trajetórias
   public static final class Trajetoria {
     public static final boolean ALIANCA = true; // Caso a aliança seja azul use false, se for vermelha use true
-    public static final String NOME_TRAJETORIA = "AutoTeste";
+    public static final String NOME_TRAJETORIA = "Principal";
     public static final String NOME_TRAJETORIA2 = "New Path2";
     public static final String NOME_TRAJETORIA3 = "New Path3";
   }

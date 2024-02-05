@@ -5,7 +5,6 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Controle;
 import frc.robot.Constants.Motors;
@@ -32,7 +31,7 @@ public class Coletor extends SubsystemBase{
             coletor1.set(1);
             coletor2.set(1);
         }
-        else if(operatorControl.getRawButton(Controle.kBack)){
+        else if(operatorControl.getRawButton(Controle.kStart)){
             coletor1.set(-1);
             coletor2.set(-1);
         }
@@ -40,7 +39,6 @@ public class Coletor extends SubsystemBase{
             coletor1.set(0);
             coletor2.set(0);
         }
-        // this.speed = speed;
     }
 
     public void collectAuto(){
@@ -54,7 +52,5 @@ public class Coletor extends SubsystemBase{
     }
 
     @Override
-    public void periodic(){
-        SmartDashboard.putNumber("Coletor Speed", speed);
-    }
+    public void periodic(){}
 }

@@ -5,7 +5,6 @@ import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Controle;
 import frc.robot.Constants.Motors;
@@ -14,6 +13,8 @@ public class Lancador extends SubsystemBase {
     CANSparkMax lancadorUp;
     CANSparkMax lancadorDown;
     CANSparkMax lancadorMeio;
+
+    double timer;
 
     public Lancador() {
         lancadorUp = new CANSparkMax(Motors.lancador2, MotorType.kBrushless);
@@ -24,21 +25,33 @@ public class Lancador extends SubsystemBase {
         lancadorDown.setIdleMode(IdleMode.kBrake);
         lancadorMeio.setIdleMode(IdleMode.kBrake);
 
-        lancadorUp.setInverted(true);
+        lancadorUp.setInverted(false);
+        lancadorDown.setInverted(true);
+
     }
 
     public void shooter(Joystick operatorControl) {
 
-        if (operatorControl.getRawButton(Controle.kB)) {
-            lancadorMeio.set(0.7);
+        if (operatorControl.getRawButton(Controle.kY)) {
+            lancadorUp.set(0.32);
+            lancadorDown.set(0.10);
 
-        } else if (operatorControl.getRawButton(Controle.kY)) {
-            lancadorUp.set(0.10);
-            lancadorDown.set(0.40);
+            if (operatorControl.getRawButton(Controle.kBack)) {
+                lancadorMeio.set(1);
+            } else {
+                lancadorMeio.stopMotor();
+            }
 
         } else if (operatorControl.getRawButton(Controle.kX)) {
-            lancadorUp.set(0.20);
-            lancadorDown.set(0.60);
+            lancadorUp.set(0.60);
+            lancadorDown.set(0.20);
+
+            if (operatorControl.getRawButton(Controle.kBack)) {
+                lancadorMeio.set(1);
+            } else {
+                lancadorMeio.stopMotor();
+            }
+
         } else {
             lancadorDown.stopMotor();
             lancadorUp.stopMotor();
@@ -49,27 +62,29 @@ public class Lancador extends SubsystemBase {
 
     public void shooterMidAuto() {
         lancadorMeio.set(0.6);
+
     }
 
     public void shootAmpAuto() {
-        lancadorUp.set(0.23);
-        lancadorDown.set(0.23);
+        lancadorUp.set(0.32);
+        lancadorDown.set(0.10);
+
     }
 
-    public void shootMaxAuto() {
-        // lancadorMeio.set(0.1);
-        lancadorUp.set(0.55);
-        lancadorDown.set(0.55);
+    public void shootSpeakerAuto() {
+        lancadorUp.set(0.60);
+        lancadorDown.set(0.20);
+
     }
 
     public void stop() {
         lancadorUp.stopMotor();
         lancadorDown.stopMotor();
         lancadorMeio.stopMotor();
+
     }
 
     @Override
     public void periodic() {
-        // SmartDashboard.putNumber("Shooter Speed", speed);
     }
 }
