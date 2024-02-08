@@ -19,11 +19,12 @@ public class Coletor extends SubsystemBase{
         coletor1 = new CANSparkMax(Motors.coletor1, MotorType.kBrushless);
         coletor2 = new CANSparkMax(Motors.coletor2, MotorType.kBrushless);
 
-        coletor2.setInverted(true);
-        coletor1.setInverted(false);
+        coletor2.setInverted(false);
+        coletor1.setInverted(true);
 
         coletor1.setIdleMode(IdleMode.kBrake);
         coletor2.setIdleMode(IdleMode.kBrake);
+
     }
 
     public void collectWithA(Joystick operatorControl){

@@ -18,13 +18,11 @@ public class GanchoCmd extends Command{
 
     @Override
     public void initialize(){
-        RobotContainer.gSubsystem.stop();
     }
 
     @Override
     public void execute(){
         gancho.escalatorVelocity(RobotContainer.operatorControl, speed);
-        gancho.encoderReset(RobotContainer.operatorControl);
     }
 
     @Override

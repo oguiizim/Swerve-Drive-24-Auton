@@ -17,8 +17,8 @@ public class Lancador extends SubsystemBase {
     double timer;
 
     public Lancador() {
-        lancadorUp = new CANSparkMax(Motors.lancador2, MotorType.kBrushless);
-        lancadorDown = new CANSparkMax(Motors.lancador1, MotorType.kBrushless);
+        lancadorUp = new CANSparkMax(Motors.lancador1, MotorType.kBrushless);
+        lancadorDown = new CANSparkMax(Motors.lancador2, MotorType.kBrushless);
         lancadorMeio = new CANSparkMax(Motors.lancador3, MotorType.kBrushless);
 
         lancadorUp.setIdleMode(IdleMode.kBrake);

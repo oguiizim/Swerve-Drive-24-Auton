@@ -1,10 +1,10 @@
 package frc.robot.subsystems.Intake;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -13,52 +13,57 @@ import frc.robot.Constants.Motors;
 
 public class Gancho extends SubsystemBase {
 
-    CANSparkMax gancho;
+    CANSparkMax hook;
 
     double speed;
 
-    RelativeEncoder g_encoder;
+    DutyCycleEncoder encoderHook;
 
     public Gancho() {
 
-        gancho = new CANSparkMax(Motors.gancho, MotorType.kBrushless);
+        hook = new CANSparkMax(Motors.gancho, MotorType.kBrushless);
 
-        g_encoder = gancho.getEncoder();
-        gancho.setIdleMode(IdleMode.kBrake);
+        encoderHook = new DutyCycleEncoder(0);
+
+        hook.setIdleMode(IdleMode.kBrake);
     }
 
     public void escalatorVelocity(Joystick operatorControl, double speed) {
-        if (operatorControl.getRawButton(Controle.kLB)) {
-            if (g_encoder.getPosition() <= 3.5) {
-                gancho.stopMotor();
+        if(operatorControl.getRawButton(Controle.kLeftAxisButton)){
+            encoderHook.reset();
+          }
+        else if(operatorControl.getRawButton(6)){
+            // Positive Speed = Hook to ground
+      
+            if(encoderHook.get() >= 3.55){
+              hook.stopMotor();
             } else {
-                gancho.set(-0.4);
+              hook.set(0.2);
             }
-        } else if (operatorControl.getRawButton(Controle.kRB)) {
-            if (g_encoder.getPosition() >= 58) {
-                gancho.stopMotor();
-            } else {
-                gancho.set(0.4);
+          }
+        else if(operatorControl.getRawButton(5)){
+            // Negative Speed = Hook to sky
+      
+            if(encoderHook.get() <= -3.70){
+              hook.stopMotor();
+            } else if(encoderHook.get() >= 0.10){
+              hook.stopMotor();
+            } 
+            else{
+              hook.set(-0.2);
             }
-        } else {
-            gancho.stopMotor();
-        }
+      
+          } else {
+            hook.stopMotor();
+          }
     }
 
     public void stop() {
-        gancho.stopMotor();
-    }
-
-    public void encoderReset(Joystick operatorControl) {
-        if (operatorControl.getRawButton(Controle.kLeftAxisButton)) {
-            g_encoder.setPosition(0);
-        } else if (operatorControl.getRawButton(Controle.kRightAxisButton)) {
-            g_encoder.setPosition(50);
-        }
+        hook.stopMotor();
     }
 
     @Override
     public void periodic() {
-        SmartDashboard.putNumber("Escalator Encoder", g_encoder.getPosition());
+        SmartDashboard.putNumber("Escalator Encoder", encoderHook.get());
     }
 }

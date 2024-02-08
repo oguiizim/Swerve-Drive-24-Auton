@@ -10,13 +10,16 @@ import frc.robot.commands.Teleop;
 import frc.robot.commands.Intake.ColetorAutoCmd;
 import frc.robot.commands.Intake.ColetorCmd;
 import frc.robot.commands.Intake.GanchoCmd;
+import frc.robot.commands.Intake.IntakeCmd;
 import frc.robot.commands.Intake.LancadorCmd;
 import frc.robot.subsystems.SwerveSubsystem;
 import frc.robot.subsystems.Intake.Coletor;
 import frc.robot.subsystems.Intake.Gancho;
+import frc.robot.subsystems.Intake.Intake;
 import frc.robot.subsystems.Intake.Lancador;
 
 import java.io.File;
+import java.util.ResourceBundle.Control;
 
 import com.pathplanner.lib.auto.NamedCommands;
 
@@ -36,12 +39,15 @@ public class RobotContainer {
   public static final Coletor cSubsystem = new Coletor();
   public static final Gancho gSubsystem = new Gancho();
   public static final Lancador lSubsystem = new Lancador();
+  public static final Intake iSubsystem = new Intake();
 
   // Inicialização dos commands
   public static final ColetorCmd cCommand = new ColetorCmd(cSubsystem);
   public static final ColetorAutoCmd cAutoCommand = new ColetorAutoCmd(cSubsystem);
   public static final GanchoCmd gCommand = new GanchoCmd(gSubsystem);
   public static final LancadorCmd lCommand = new LancadorCmd(lSubsystem);
+  // public static final IntakeCmd iCommand = new IntakeCmd(iSubsystem);
+  public static final IntakeCmd iCommand = new IntakeCmd(iSubsystem);
 
   // Controles
   public static final XboxController controleXbox = new XboxController(Controle.xboxControle);
@@ -86,6 +92,12 @@ public class RobotContainer {
      * driverXbox::getXButtonPressed,
      * driverXbox::getBButtonPressed);
      */
+
+
+    cSubsystem.setDefaultCommand(cCommand);
+    gSubsystem.setDefaultCommand(gCommand);
+    lSubsystem.setDefaultCommand(lCommand);
+    iSubsystem.setDefaultCommand(iCommand);
 
     // Colocar os comandos definidos no PathPlanner 2024 da seguinte forma
 

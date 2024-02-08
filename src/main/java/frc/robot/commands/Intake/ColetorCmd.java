@@ -16,7 +16,6 @@ public class ColetorCmd extends Command{
 
     @Override
     public void initialize(){
-        RobotContainer.cSubsystem.stop();
     }
 
     @Override
