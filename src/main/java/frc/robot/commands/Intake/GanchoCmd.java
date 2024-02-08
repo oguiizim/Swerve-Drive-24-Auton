@@ -22,7 +22,7 @@ public class GanchoCmd extends Command{
 
     @Override
     public void execute(){
-        gancho.escalatorVelocity(RobotContainer.operatorControl, speed);
+        // gancho.escalatorVelocity(RobotContainer.operatorControl, speed);
     }
 
     @Override

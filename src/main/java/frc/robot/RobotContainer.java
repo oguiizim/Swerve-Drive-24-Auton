@@ -19,8 +19,6 @@ import frc.robot.subsystems.Intake.Intake;
 import frc.robot.subsystems.Intake.Lancador;
 
 import java.io.File;
-import java.util.ResourceBundle.Control;
-
 import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.math.MathUtil;

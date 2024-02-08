@@ -21,7 +21,7 @@ public class LancadorCmd extends Command{
 
     @Override
     public void execute(){
-        lancador.shooter(RobotContainer.operatorControl);
+        // lancador.shooter(RobotContainer.operatorControl);
     }
 
     @Override
