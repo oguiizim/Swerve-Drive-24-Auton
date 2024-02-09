@@ -54,11 +54,11 @@ public final class Constants {
   // Classe que contém os PID para o autônomo
   public static final class PID {
     // PID para frente e para trás
-    public static final PIDFConfig xAutoPID = new PIDFConfig(0.65, 0, 0.05);
+    public static final PIDFConfig xAutoPID = new PIDFConfig(0.80, 0, 0.05);
     // PID para esquerda e direita
     public static final PIDFConfig yAutoPID = new PIDFConfig(0.6, 0, 0);
     // PID de rotação
-    public static final PIDFConfig angleAutoPID = new PIDFConfig(0.1, 0, 0.01);
+    public static final PIDFConfig angleAutoPID = new PIDFConfig(0.7, 0, 0.01);
   }
 
   public static final class Motors {

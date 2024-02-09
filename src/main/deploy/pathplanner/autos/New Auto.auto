@@ -5,7 +5,7 @@
       "x": 15.66,
       "y": 7.09
     },
-    "rotation": 0
+    "rotation": 180.0
   },
   "command": {
     "type": "sequential",
@@ -14,7 +14,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Principal - Path1"
+            "pathName": "path2"
           }
         },
         {
@@ -26,19 +26,13 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 2.0
           }
         },
         {
           "type": "named",
           "data": {
             "name": "stopIntake"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Principal - Path2"
           }
         }
       ]
