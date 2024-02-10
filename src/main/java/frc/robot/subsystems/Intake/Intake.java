@@ -175,4 +175,8 @@ public class Intake extends SubsystemBase {
         escalator.set(-0.3);
     }
 
+    public void stopEscalator(){
+        escalator.stopMotor();
+    }
+
 }

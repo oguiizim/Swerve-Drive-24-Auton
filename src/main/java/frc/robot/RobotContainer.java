@@ -19,7 +19,11 @@ import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PS4Controller;
+import edu.wpi.first.wpilibj.PS5Controller;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Joystick.AxisType;
+import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.StadiaController.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -110,8 +114,30 @@ public class RobotContainer {
   // Função onde os eventos (triggers) são configurados
   private void configureBindings() {
     // Botão para resetar o gyro do robô
-    new JoystickButton(controleXbox, XboxController.Button.kA.value).onTrue(new InstantCommand(swerve::zeroGyro));
-    new JoystickButton(operatorControl, Button.kY.value).onTrue(new InstantCommand(iSubsystem::collect));
+    new JoystickButton(controleXbox, Button.kA.value).onTrue(new InstantCommand(swerve::zeroGyro));
+
+    // Comands Coletor
+    new JoystickButton(operatorControl, XboxController.Button.kA.value).onTrue(new InstantCommand(iSubsystem::collect)); // Coletor On
+    new JoystickButton(operatorControl, XboxController.Button.kA.value).onFalse(new InstantCommand(iSubsystem::stopColetor)); // Coletor Off
+    new JoystickButton(operatorControl, XboxController.Button.kStart.value).onTrue(new InstantCommand(iSubsystem::shooterMidFwd)); // KitBot Fwd On
+    new JoystickButton(operatorControl, XboxController.Button.kStart.value).onFalse(new InstantCommand(iSubsystem::stopShooter)); // KitBot Fwd Off
+
+    // Commands Shooter
+    new JoystickButton(operatorControl, XboxController.Button.kBack.value).onTrue(new InstantCommand(iSubsystem::shooterMidBcd)); // KitBot Bcd On
+    new JoystickButton(operatorControl, XboxController.Button.kBack.value).onFalse(new InstantCommand(iSubsystem::stopShooter)); // KitBot Bcd Off
+    new JoystickButton(operatorControl, XboxController.Button.kY.value).onTrue(new InstantCommand(iSubsystem::collectSource)); // Shooter Source On
+    new JoystickButton(operatorControl, XboxController.Button.kY.value).onFalse(new InstantCommand(iSubsystem::stopShooter)); // Shooter Source Off
+    new JoystickButton(operatorControl, XboxController.Button.kRightBumper.value).onTrue(new InstantCommand(iSubsystem::shootSpeaker)); // Shooter Speaker On
+    new JoystickButton(operatorControl, XboxController.Button.kRightBumper.value).onFalse(new InstantCommand(iSubsystem::stopShooter)); // Shooter Speaker Off
+    new JoystickButton(operatorControl, XboxController.Button.kLeftBumper.value).onTrue(new InstantCommand(iSubsystem::shootAmp)); // Shooter Amp On
+    new JoystickButton(operatorControl, XboxController.Button.kLeftBumper.value).onFalse(new InstantCommand(iSubsystem::stopShooter)); // Shooter Amp Off
+
+    // Commands Climber
+    new JoystickButton(operatorControl, XboxController.Button.kRightStick.value).onTrue(new InstantCommand(iSubsystem::escalatorFwd)); // Escalator Fwd On
+    new JoystickButton(operatorControl, XboxController.Button.kRightStick.value).onFalse(new InstantCommand(iSubsystem::stopEscalator)); // Escalator Fwd Off
+    new JoystickButton(operatorControl, XboxController.Button.kLeftStick.value).onTrue(new InstantCommand(iSubsystem::escalatorBcd)); // Escalator Bcd On
+    new JoystickButton(operatorControl, XboxController.Button.kLeftStick.value).onFalse(new InstantCommand(iSubsystem::stopEscalator)); // Escalator Bcd Off
+
   }
 
   // Função que retorna o autônomo
