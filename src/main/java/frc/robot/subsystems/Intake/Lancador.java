@@ -30,58 +30,36 @@ public class Lancador extends SubsystemBase {
 
     }
 
-    public void shooter(Joystick operatorControl) {
-
-        if (operatorControl.getRawButton(Controle.kY)) {
-            lancadorUp.set(0.32);
-            lancadorDown.set(0.10);
-
-            if (operatorControl.getRawButton(Controle.kBack)) {
-                lancadorMeio.set(1);
-            } else {
-                lancadorMeio.stopMotor();
-            }
-
-        } else if (operatorControl.getRawButton(Controle.kX)) {
-            lancadorUp.set(0.60);
-            lancadorDown.set(0.20);
-
-            if (operatorControl.getRawButton(Controle.kBack)) {
-                lancadorMeio.set(1);
-            } else {
-                lancadorMeio.stopMotor();
-            }
-
-        } else {
-            lancadorDown.stopMotor();
-            lancadorUp.stopMotor();
-            lancadorMeio.stopMotor();
-        }
-
+    public void coletar() {
+        lancadorMeio.set(0.6);
     }
 
-    public void shooterMidAuto() {
-        lancadorMeio.set(0.6);
+    public void cuspir() {
+        lancadorMeio.set(-0.5);
+    }
 
+    public void coletorLancador(){
+        lancadorUp.set(-0.30);
+        lancadorDown.set(-0.30);
+    }
+    
+    public void stopCondutor() {
+        lancadorMeio.stopMotor();
     }
 
     public void shootAmpAuto() {
         lancadorUp.set(0.32);
         lancadorDown.set(0.10);
-
     }
 
     public void shootSpeakerAuto() {
         lancadorUp.set(0.60);
         lancadorDown.set(0.20);
-
     }
 
     public void stop() {
         lancadorUp.stopMotor();
         lancadorDown.stopMotor();
-        lancadorMeio.stopMotor();
-
     }
 
     @Override

@@ -30,8 +30,8 @@ public final class Constants {
     public static final Matter CHASSIS = new Matter(new Translation3d(xMass, yMass, (zMass)), ROBOT_MASS);
 
     // Máxima aceleração e velocidade
-    public static final double MAX_ACCE_AUTO = 1;
-    public static final double MAX_VEL_AUTO = 1;
+    public static final double MAX_ACCE_AUTO = 2;
+    public static final double MAX_VEL_AUTO = 2.5;
 
     // Diâmetro da roda do módulo
     public static final double wheelDiameterInMeters = Units.inchesToMeters(4);
@@ -54,11 +54,11 @@ public final class Constants {
   // Classe que contém os PID para o autônomo
   public static final class PID {
     // PID para frente e para trás
-    public static final PIDFConfig xAutoPID = new PIDFConfig(0.80, 0, 0.05);
+    public static final PIDFConfig xAutoPID = new PIDFConfig(0.80, 0, 0.0);
     // PID para esquerda e direita
     public static final PIDFConfig yAutoPID = new PIDFConfig(0.6, 0, 0);
     // PID de rotação
-    public static final PIDFConfig angleAutoPID = new PIDFConfig(0.7, 0, 0.01);
+    public static final PIDFConfig angleAutoPID = new PIDFConfig(2, 0.0, 0.0);
   }
 
   public static final class Motors {
@@ -124,18 +124,11 @@ public final class Constants {
     public static final double TURN_CONSTANT = 0.75;
 
     // constante que define a velocidade máxima
-    public static final double MAX_SPEED = 4.8;
+    public static final double MAX_SPEED = 3;
 
     public static final double dt = 0.02;
 
     public static final double constantRotation = 4;
-
-    // Velocidade de cada parte do intake
-    public static final double coletorSpd = 1;
-    public static final double ganhcoSpd = 0.5;
-    public static final double lancadorMax = 1;
-    public static final double lancadorMid = 1;
-    public static final double lancadorAmp = 1;
 
   }
 

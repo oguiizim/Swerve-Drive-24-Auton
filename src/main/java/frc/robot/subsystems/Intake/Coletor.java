@@ -42,6 +42,16 @@ public class Coletor extends SubsystemBase{
         }
     }
 
+    public void coletar() {
+        coletor1.set(1);
+        coletor2.set(1);
+    }
+
+    public void cuspir(){
+        coletor1.set(-1);
+        coletor2.set(-1);
+    }
+
     public void collectAuto(){
         coletor1.set(1);
         coletor2.set(1);

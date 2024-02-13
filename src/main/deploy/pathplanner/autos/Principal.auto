@@ -2,25 +2,68 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 15.66,
+      "x": 0.73,
       "y": 7.09
     },
-    "rotation": 0
+    "rotation": 65.41
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "Principal - Path1"
+            "name": "shootSpeaker"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "collect"
+            "name": "shooterMidMotor"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.2
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "stopShooter"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "A1 - P1"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "collect"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "shooterMidMotor"
+                }
+              }
+            ]
           }
         },
         {
@@ -36,9 +79,9 @@
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "Principal - Path2"
+            "name": "stopShooter"
           }
         }
       ]
