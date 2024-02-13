@@ -16,6 +16,24 @@
           "data": {
             "pathName": "Gyro"
           }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "shooterMidMotor"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "stopCondutor"
+          }
         }
       ]
     }

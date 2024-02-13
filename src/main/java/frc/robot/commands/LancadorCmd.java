@@ -1,9 +1,9 @@
-package frc.robot.commands.Intake;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.Controle;
-import frc.robot.subsystems.Intake.Lancador;
+import frc.robot.subsystems.Lancador;
 
 public class LancadorCmd extends Command{
     Lancador lancador;

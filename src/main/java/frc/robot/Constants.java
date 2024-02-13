@@ -58,7 +58,7 @@ public final class Constants {
     // PID para esquerda e direita
     public static final PIDFConfig yAutoPID = new PIDFConfig(0.6, 0, 0);
     // PID de rotação
-    public static final PIDFConfig angleAutoPID = new PIDFConfig(2, 0.0, 0.0);
+    public static final PIDFConfig angleAutoPID = new PIDFConfig(2.3, 0.0, 0.0);
   }
 
   public static final class Motors {

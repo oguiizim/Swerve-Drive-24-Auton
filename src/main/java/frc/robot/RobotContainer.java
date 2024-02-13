@@ -6,13 +6,12 @@ package frc.robot;
 
 import frc.robot.Constants.Controle;
 import frc.robot.commands.GanchoCmd;
+import frc.robot.commands.LancadorCmd;
 import frc.robot.commands.Teleop;
-import frc.robot.commands.Intake.LancadorCmd;
+import frc.robot.subsystems.Coletor;
 import frc.robot.subsystems.Gancho;
+import frc.robot.subsystems.Lancador;
 import frc.robot.subsystems.SwerveSubsystem;
-import frc.robot.subsystems.Intake.Coletor;
-import frc.robot.subsystems.Intake.Intake;
-import frc.robot.subsystems.Intake.Lancador;
 
 import java.io.File;
 
@@ -34,14 +33,13 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   private SwerveSubsystem swerve = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
 
-  // Inicialização dos subsystems
   public static final Coletor cSubsystem = new Coletor();
   public static final Gancho gSubsystem = new Gancho();
   public static final Lancador lSubsystem = new Lancador();
 
-  // Inicialização dos commands
   // public static final ColetorCmd cCommand = new ColetorCmd(cSubsystem);
-  // public static final ColetorAutoCmd cAutoCommand = new ColetorAutoCmd(cSubsystem);
+  // public static final ColetorAutoCmd cAutoCommand = new
+  // ColetorAutoCmd(cSubsystem);
   // public static final GanchoCmd gCommand = new GanchoCmd(gSubsystem);
   // public static final LancadorCmd lCommand = new LancadorCmd(lSubsystem);
   // public static final IntakeCmd iCommand = new IntakeCmd(iSubsystem);
@@ -55,33 +53,20 @@ public class RobotContainer {
 
   public RobotContainer() {
 
-    // NamedCommands.registerCommand("collect", new ColetorAutoCmd(cSubsystem));
-
-    // Intake commands on auto
     NamedCommands.registerCommand("zeroGyro", new InstantCommand(swerve::zeroGyro));
+
+    NamedCommands.registerCommand("shootSpeaker", new InstantCommand(lSubsystem::shootSpeakerAuto));
+    NamedCommands.registerCommand("shooterMidMotor", new InstantCommand(lSubsystem::coletar));
+    NamedCommands.registerCommand("stopShooter", new InstantCommand(lSubsystem::stop));
+    NamedCommands.registerCommand("stopCondutor", new InstantCommand(lSubsystem::stopCondutor));
+    NamedCommands.registerCommand("collect", new InstantCommand(cSubsystem::coletar));
+    NamedCommands.registerCommand("stopIntake", new InstantCommand(cSubsystem::stop));
 
     // Definimos o comando padrão como a tração
     swerve.setDefaultCommand(new Teleop(swerve,
-        // Aqui dentro temos vários inputs do nossos gamepad, estaremos passando a
-        // própria função pelo método,
-        // apenas preferência de sintaxe, o desempenho em si não se altera
         () -> -MathUtil.applyDeadband(controleXbox.getLeftY(), Controle.DEADBAND),
         () -> -MathUtil.applyDeadband(controleXbox.getLeftX(), Controle.DEADBAND),
         () -> -MathUtil.applyDeadband(controleXbox.getRightX(), Controle.DEADBAND)));
-
-    /*
-     * AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
-     * () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
-     * Controle.DEADBAND),
-     * () -> -MathUtil.applyDeadband(driverXbox.getLeftY(),
-     * Controle.DEADBAND),
-     * () -> MathUtil.applyDeadband(driverXbox.getRightX(),
-     * Controle.DEADBAND),
-     * driverXbox::getYButtonPressed,
-     * driverXbox::getAButtonPressed,
-     * driverXbox::getXButtonPressed,
-     * driverXbox::getBButtonPressed);
-     */
 
     gSubsystem.setDefaultCommand(new GanchoCmd(gSubsystem, controleXbox));
     lSubsystem.setDefaultCommand(new LancadorCmd(lSubsystem, operatorControl));
@@ -90,33 +75,30 @@ public class RobotContainer {
 
     SmartDashboard.putData("Auto Chooser", autoChooser);
 
-    // Configure the trigger bindings
     configureBindings();
   }
 
-  // Função onde os eventos (triggers) são configurados
   private void configureBindings() {
     new JoystickButton(controleXbox, Button.kA.value).onTrue(new InstantCommand(swerve::zeroGyro));
 
-    new JoystickButton(operatorControl, XboxController.Button.kA.value).onTrue(Commands.runOnce(() ->{
+    new JoystickButton(operatorControl, XboxController.Button.kA.value).onTrue(Commands.runOnce(() -> {
       cSubsystem.coletar();
     }, cSubsystem, lSubsystem)).onFalse(Commands.runOnce(() -> {
       cSubsystem.stop();
     }, cSubsystem));
   }
 
-  // Função que retorna o autônomo
   public Command getAutonomousCommand() {
     // swerve.zeroGyro();
 
     return autoChooser.getSelected();
 
     // Feito pela StemOs
-    // return swerve.getAutonomousCommand(Trajetoria.NOME_TRAJETORIA, Trajetoria.ALIANCA, true);
+    // return swerve.getAutonomousCommand(Trajetoria.NOME_TRAJETORIA,
+    // Trajetoria.ALIANCA, true);
 
   }
 
-  // Define os motores como coast ou brake
   public void setMotorBrake(boolean brake) {
     swerve.setMotorBrake(brake);
   }
