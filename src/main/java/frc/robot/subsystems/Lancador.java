@@ -28,15 +28,15 @@ public class Lancador extends SubsystemBase {
 
     }
 
-    public void coletar() {
+    public void shooterMidCollectDown() {
         lancadorMeio.set(0.6);
     }
 
-    public void cuspir() {
+    public void shooterMidCollectUp() {
         lancadorMeio.set(-0.5);
     }
 
-    public void coletorLancador(){
+    public void collectShooter(){
         lancadorUp.set(-0.30);
         lancadorDown.set(-0.30);
     }
@@ -45,12 +45,12 @@ public class Lancador extends SubsystemBase {
         lancadorMeio.stopMotor();
     }
 
-    public void shootAmpAuto() {
+    public void shootAmp() {
         lancadorUp.set(0.32);
         lancadorDown.set(0.10);
     }
 
-    public void shootSpeakerAuto() {
+    public void shootSpeaker() {
         lancadorUp.set(0.60);
         lancadorDown.set(0.20);
     }
@@ -58,9 +58,5 @@ public class Lancador extends SubsystemBase {
     public void stop() {
         lancadorUp.stopMotor();
         lancadorDown.stopMotor();
-    }
-
-    @Override
-    public void periodic() {
     }
 }

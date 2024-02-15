@@ -29,6 +29,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class RobotContainer {
   private SwerveSubsystem swerve = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
@@ -36,13 +37,6 @@ public class RobotContainer {
   public static final Coletor cSubsystem = new Coletor();
   public static final Gancho gSubsystem = new Gancho();
   public static final Lancador lSubsystem = new Lancador();
-
-  // public static final ColetorCmd cCommand = new ColetorCmd(cSubsystem);
-  // public static final ColetorAutoCmd cAutoCommand = new
-  // ColetorAutoCmd(cSubsystem);
-  // public static final GanchoCmd gCommand = new GanchoCmd(gSubsystem);
-  // public static final LancadorCmd lCommand = new LancadorCmd(lSubsystem);
-  // public static final IntakeCmd iCommand = new IntakeCmd(iSubsystem);
 
   // Controles
   public static final XboxController controleXbox = new XboxController(Controle.xboxControle);
@@ -55,12 +49,14 @@ public class RobotContainer {
 
     NamedCommands.registerCommand("zeroGyro", new InstantCommand(swerve::zeroGyro));
 
-    NamedCommands.registerCommand("shootSpeaker", new InstantCommand(lSubsystem::shootSpeakerAuto));
-    NamedCommands.registerCommand("shooterMidMotor", new InstantCommand(lSubsystem::coletar));
-    NamedCommands.registerCommand("stopShooter", new InstantCommand(lSubsystem::stop));
-    NamedCommands.registerCommand("stopCondutor", new InstantCommand(lSubsystem::stopCondutor));
-    NamedCommands.registerCommand("collect", new InstantCommand(cSubsystem::coletar));
-    NamedCommands.registerCommand("stopIntake", new InstantCommand(cSubsystem::stop));
+    NamedCommands.registerCommand("shootSpeaker", new InstantCommand(lSubsystem::shootSpeaker, lSubsystem));
+    NamedCommands.registerCommand("shooterMidMotor", new InstantCommand(lSubsystem::shooterMidCollectDown, lSubsystem));
+    NamedCommands.registerCommand("stopShooter", new InstantCommand(lSubsystem::stop, lSubsystem));
+    NamedCommands.registerCommand("stopCondutor", new InstantCommand(lSubsystem::stopCondutor, lSubsystem));
+    NamedCommands.registerCommand("collect", new InstantCommand(cSubsystem::collect, cSubsystem));
+    NamedCommands.registerCommand("stopIntake", new InstantCommand(cSubsystem::stop, cSubsystem));
+    // NamedCommands.registerCommand("shooterMidMotor",
+    // Commands.run(lSubsystem::shooterMidCollectDown, lSubsystem));
 
     // Definimos o comando padrão como a tração
     swerve.setDefaultCommand(new Teleop(swerve,
@@ -69,7 +65,7 @@ public class RobotContainer {
         () -> -MathUtil.applyDeadband(controleXbox.getRightX(), Controle.DEADBAND)));
 
     gSubsystem.setDefaultCommand(new GanchoCmd(gSubsystem, controleXbox));
-    lSubsystem.setDefaultCommand(new LancadorCmd(lSubsystem, operatorControl));
+    lSubsystem.setDefaultCommand(new LancadorCmd(lSubsystem));
 
     autoChooser = AutoBuilder.buildAutoChooser();
 
@@ -81,22 +77,65 @@ public class RobotContainer {
   private void configureBindings() {
     new JoystickButton(controleXbox, Button.kA.value).onTrue(new InstantCommand(swerve::zeroGyro));
 
-    new JoystickButton(operatorControl, XboxController.Button.kA.value).onTrue(Commands.runOnce(() -> {
-      cSubsystem.coletar();
-    }, cSubsystem, lSubsystem)).onFalse(Commands.runOnce(() -> {
-      cSubsystem.stop();
-    }, cSubsystem));
+    new JoystickButton(operatorControl, XboxController.Button.kA.value).whileTrue(Commands.runEnd(
+        () -> {
+          cSubsystem.collect();
+          lSubsystem.shooterMidCollectDown();
+        },
+        () -> {
+          cSubsystem.stop();
+          lSubsystem.stopCondutor();
+        },
+        lSubsystem));
+
+    new JoystickButton(operatorControl, XboxController.Button.kY.value).whileTrue(Commands.runEnd(
+        () -> {
+          lSubsystem.collectShooter();
+          lSubsystem.shooterMidCollectUp();
+        },
+        () -> {
+          lSubsystem.stop();
+          lSubsystem.stopCondutor();
+        },
+        lSubsystem));
+
+    new JoystickButton(operatorControl, XboxController.Button.kB.value).whileTrue(Commands.startEnd(
+        () -> lSubsystem.shooterMidCollectUp(),
+        () -> lSubsystem.stopCondutor(),
+        lSubsystem));
+
+    new JoystickButton(operatorControl, XboxController.Button.kX.value).whileTrue(Commands.startEnd(
+        () -> lSubsystem.shooterMidCollectDown(),
+        () -> lSubsystem.stopCondutor(),
+        lSubsystem));
+
+    new Trigger(this::getOperatorRightTrigger).whileTrue(Commands.startEnd(
+        () -> lSubsystem.shootSpeaker(),
+        () -> lSubsystem.stop(),
+        lSubsystem));
+
+    new Trigger(this::getOperarorLeftTrigger).whileTrue(Commands.startEnd(
+        () -> lSubsystem.shootAmp(),
+        () -> lSubsystem.stop(),
+        lSubsystem));
+  }
+
+  private boolean getOperatorRightTrigger() {
+    if (operatorControl.getRawAxis(Controle.rightTrigger) > 0.1) {
+      return true;
+    }
+    return false;
+  }
+
+  private boolean getOperarorLeftTrigger() {
+    if (operatorControl.getRawAxis(Controle.leftTrigger) > 0.1) {
+      return true;
+    }
+    return false;
   }
 
   public Command getAutonomousCommand() {
-    // swerve.zeroGyro();
-
     return autoChooser.getSelected();
-
-    // Feito pela StemOs
-    // return swerve.getAutonomousCommand(Trajetoria.NOME_TRAJETORIA,
-    // Trajetoria.ALIANCA, true);
-
   }
 
   public void setMotorBrake(boolean brake) {
