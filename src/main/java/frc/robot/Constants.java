@@ -14,7 +14,6 @@ import swervelib.parser.PIDFConfig;
  * Classe de constantes
  */
 public final class Constants {
-  // Aqui temos várias constantes referentes as demais áreas do robô
 
   public static final class Dimensoes {
     // Tempo de loop (sparkMax + normal = 130ms)
@@ -51,40 +50,32 @@ public final class Constants {
         pulsePerRotation);
   }
 
-  // Classe que contém os PID para o autônomo
   public static final class PID {
     // PID para frente e para trás
-    public static final PIDFConfig xAutoPID = new PIDFConfig(0.80, 0, 0.0);
+    public static final PIDFConfig xAutoPID = new PIDFConfig(1.7, 0, 0.0);
     // PID para esquerda e direita
-    public static final PIDFConfig yAutoPID = new PIDFConfig(0.6, 0, 0);
+    public static final PIDFConfig yAutoPID = new PIDFConfig(1.6, 0, 0);
     // PID de rotação
-    public static final PIDFConfig angleAutoPID = new PIDFConfig(2.3, 0.0, 0.0);
+    public static final PIDFConfig angleAutoPID = new PIDFConfig(1.8, 0.1, 0);
   }
 
   public static final class Motors {
-    // ID SparkMax intake
     public static final int coletor1 = 9;
     public static final int coletor2 = 10;
 
-    // ID SparkMax shooter
     public static final int lancador1 = 11;
     public static final int lancador2 = 12;
     public static final int lancador3 = 13;
 
-    // ID SparkMax escalator
     public static final int gancho = 14;
   }
 
-  // Contem a porta em que o controle está
   public static final class Controle {
-    // Porta dos controles
     public static final int xboxControle = 0;
     public static final int controle2 = 1;
 
-    // Deadband do controle
-    public static final double DEADBAND = 0.1;
+    public static final double DEADBAND = 0.01;
 
-    // Eixos do controle
     public static final int xLeftAxis = 0;
     public static final int yLeftAxis = 1;
     public static final int leftTrigger = 2;
@@ -92,7 +83,6 @@ public final class Constants {
     public static final int xRightAxix = 4;
     public static final int yRightAxis = 5;
 
-    // Botões do controle
     public static final int kA = 1;
     public static final int kB = 2;
     public static final int kX = 3;
@@ -107,23 +97,16 @@ public final class Constants {
   }
 
   public static final class Tracao {
-    // Define se a tração vai ser orientada ao campo
     public static final boolean fieldRelative = true;
-    // false para malha-fechada
     public static final boolean isOpenLoop = false;
     // true para correção de aceleração
     public static final boolean accelCorrection = false;
-    // constante para diminuir o input do joystick (0 < multiplicadorRotacional <=
-    // 1)
     public static final double multiplicadorRotacional = 0.8;
-    // constante para diminuir o input do joystick (y)
     public static final double multiplicadorTranslacionalY = 0.9;
-    // constante para diminuir o input do joystick (x)
     public static final double multiplicadorTranslacionalX = 0.9;
 
     public static final double TURN_CONSTANT = 0.75;
 
-    // constante que define a velocidade máxima
     public static final double MAX_SPEED = 3;
 
     public static final double dt = 0.02;

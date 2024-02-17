@@ -17,7 +17,6 @@ import java.io.File;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.Joystick;
@@ -47,9 +46,8 @@ public class RobotContainer {
 
   public RobotContainer() {
 
-    NamedCommands.registerCommand("zeroGyro", new InstantCommand(swerve::zeroGyro));
-
-    NamedCommands.registerCommand("shootSpeaker", new InstantCommand(lSubsystem::shootSpeaker, lSubsystem));
+    NamedCommands.registerCommand("shootSpeaker",
+        new InstantCommand(lSubsystem::shootSpeaker, lSubsystem).withTimeout(1));
     NamedCommands.registerCommand("shooterMidMotor", new InstantCommand(lSubsystem::shooterMidCollectDown, lSubsystem));
     NamedCommands.registerCommand("stopShooter", new InstantCommand(lSubsystem::stop, lSubsystem));
     NamedCommands.registerCommand("stopCondutor", new InstantCommand(lSubsystem::stopCondutor, lSubsystem));
@@ -109,15 +107,18 @@ public class RobotContainer {
         () -> lSubsystem.stopCondutor(),
         lSubsystem));
 
-    new Trigger(this::getOperatorRightTrigger).whileTrue(Commands.startEnd(
+    new Trigger(this::getOperatorRightTrigger).onTrue(Commands.runOnce(
         () -> lSubsystem.shootSpeaker(),
-        () -> lSubsystem.stop(),
-        lSubsystem));
+        lSubsystem)).onFalse(Commands.runOnce(
+            () -> lSubsystem.stop(),
+            lSubsystem));
 
-    new Trigger(this::getOperarorLeftTrigger).whileTrue(Commands.startEnd(
+    new Trigger(this::getOperarorLeftTrigger).onTrue(Commands.runOnce(
         () -> lSubsystem.shootAmp(),
-        () -> lSubsystem.stop(),
-        lSubsystem));
+        lSubsystem)).onFalse(Commands.runOnce(
+            () -> lSubsystem.stop(),
+            lSubsystem));
+
   }
 
   private boolean getOperatorRightTrigger() {

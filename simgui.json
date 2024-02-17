@@ -7,6 +7,11 @@
       "/SmartDashboard/Pigeon 2 (v6) [0]": "Gyro"
     },
     "windows": {
+      "/SmartDashboard/Auto Chooser": {
+        "window": {
+          "visible": true
+        }
+      },
       "/SmartDashboard/Field": {
         "Robot": {
           "length": 0.6100000143051147,

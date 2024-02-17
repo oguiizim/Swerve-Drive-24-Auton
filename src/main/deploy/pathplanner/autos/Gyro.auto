@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.0,
-      "y": 7.099142454512667
+      "x": 1.13,
+      "y": 7.38
     },
     "rotation": 0
   },
@@ -15,24 +15,6 @@
           "type": "path",
           "data": {
             "pathName": "Gyro"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "shooterMidMotor"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "stopCondutor"
           }
         }
       ]
