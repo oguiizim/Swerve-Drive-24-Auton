@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.Controle;
 import frc.robot.commands.GanchoCmd;
+import frc.robot.commands.Gyro;
 import frc.robot.commands.LancadorCmd;
 import frc.robot.commands.Teleop;
 import frc.robot.subsystems.Coletor;
@@ -31,32 +32,32 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class RobotContainer {
-  private SwerveSubsystem swerve = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
+  static final SwerveSubsystem swerve = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
 
   public static final Coletor cSubsystem = new Coletor();
   public static final Gancho gSubsystem = new Gancho();
   public static final Lancador lSubsystem = new Lancador();
 
-  // Controles
   public static final XboxController controleXbox = new XboxController(Controle.xboxControle);
   public static final Joystick operatorControl = new Joystick(Controle.controle2);
 
-  // Auto Choser para autonômo
   private final SendableChooser<Command> autoChooser;
 
   public RobotContainer() {
 
     NamedCommands.registerCommand("shootSpeaker",
-        new InstantCommand(lSubsystem::shootSpeaker, lSubsystem).withTimeout(1));
-    NamedCommands.registerCommand("shooterMidMotor", new InstantCommand(lSubsystem::shooterMidCollectDown, lSubsystem));
+        new InstantCommand(lSubsystem::shootSpeaker, lSubsystem).withTimeout(2));
+        
+    NamedCommands.registerCommand("condutorShoot", new InstantCommand(lSubsystem::shooterMidCollectDown, lSubsystem));
     NamedCommands.registerCommand("stopShooter", new InstantCommand(lSubsystem::stop, lSubsystem));
     NamedCommands.registerCommand("stopCondutor", new InstantCommand(lSubsystem::stopCondutor, lSubsystem));
     NamedCommands.registerCommand("collect", new InstantCommand(cSubsystem::collect, cSubsystem));
     NamedCommands.registerCommand("stopIntake", new InstantCommand(cSubsystem::stop, cSubsystem));
-    // NamedCommands.registerCommand("shooterMidMotor",
-    // Commands.run(lSubsystem::shooterMidCollectDown, lSubsystem));
 
-    // Definimos o comando padrão como a tração
+    // setPoinit positvo = Giro para esquerda
+    // setPoint negativo = Giro para direita
+    NamedCommands.registerCommand("gyro-45", new Gyro(swerve, -55));
+
     swerve.setDefaultCommand(new Teleop(swerve,
         () -> -MathUtil.applyDeadband(controleXbox.getLeftY(), Controle.DEADBAND),
         () -> -MathUtil.applyDeadband(controleXbox.getLeftX(), Controle.DEADBAND),
@@ -113,7 +114,7 @@ public class RobotContainer {
             () -> lSubsystem.stop(),
             lSubsystem));
 
-    new Trigger(this::getOperarorLeftTrigger).onTrue(Commands.runOnce(
+    new Trigger(this::getOperatorLeftTrigger).onTrue(Commands.runOnce(
         () -> lSubsystem.shootAmp(),
         lSubsystem)).onFalse(Commands.runOnce(
             () -> lSubsystem.stop(),
@@ -122,20 +123,21 @@ public class RobotContainer {
   }
 
   private boolean getOperatorRightTrigger() {
-    if (operatorControl.getRawAxis(Controle.rightTrigger) > 0.1) {
+    if (operatorControl.getRawAxis(Controle.rightTrigger) != 0) {
       return true;
     }
     return false;
   }
 
-  private boolean getOperarorLeftTrigger() {
-    if (operatorControl.getRawAxis(Controle.leftTrigger) > 0.1) {
+  private boolean getOperatorLeftTrigger() {
+    if (operatorControl.getRawAxis(Controle.leftTrigger) != 0) {
       return true;
     }
     return false;
   }
 
   public Command getAutonomousCommand() {
+    swerve.zeroGyro();
     return autoChooser.getSelected();
   }
 

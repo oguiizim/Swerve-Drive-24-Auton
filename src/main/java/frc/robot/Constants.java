@@ -19,7 +19,7 @@ public final class Constants {
     // Tempo de loop (sparkMax + normal = 130ms)
     public static final double LOOP_TIME = 0.13;
     // Massa do robô
-    public static final double ROBOT_MASS = 38;
+    public static final double ROBOT_MASS = 35;
 
     // Posições do centro de massa
     private static final double xMass = 0;
@@ -52,11 +52,11 @@ public final class Constants {
 
   public static final class PID {
     // PID para frente e para trás
-    public static final PIDFConfig xAutoPID = new PIDFConfig(1.7, 0, 0.0);
+    public static final PIDFConfig xAutoPID = new PIDFConfig(1.2, 0, 0);
     // PID para esquerda e direita
-    public static final PIDFConfig yAutoPID = new PIDFConfig(1.6, 0, 0);
+    public static final PIDFConfig yAutoPID = new PIDFConfig(1.2, 0, 0);
     // PID de rotação
-    public static final PIDFConfig angleAutoPID = new PIDFConfig(1.8, 0.1, 0);
+    public static final PIDFConfig angleAutoPID = new PIDFConfig(2.3, 0, 0);
   }
 
   public static final class Motors {
@@ -74,7 +74,7 @@ public final class Constants {
     public static final int xboxControle = 0;
     public static final int controle2 = 1;
 
-    public static final double DEADBAND = 0.01;
+    public static final double DEADBAND = 0.1;
 
     public static final int xLeftAxis = 0;
     public static final int yLeftAxis = 1;
@@ -93,7 +93,6 @@ public final class Constants {
     public static final int kStart = 8;
     public static final int kLeftAxisButton = 9;
     public static final int kRightAxisButton = 10;
-
   }
 
   public static final class Tracao {
@@ -112,7 +111,6 @@ public final class Constants {
     public static final double dt = 0.02;
 
     public static final double constantRotation = 4;
-
   }
 
   // Classe que guarda os nomes das trajetórias

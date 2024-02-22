@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.13,
-      "y": 7.38
+      "x": 1.9463444376930044,
+      "y": 7.13001868613151
     },
     "rotation": 0
   },
@@ -14,7 +14,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Gyro"
+            "pathName": "Y"
           }
         }
       ]

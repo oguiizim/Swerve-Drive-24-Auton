@@ -3,7 +3,12 @@
   "robotLength": 0.61,
   "holonomicMode": true,
   "pathFolders": [
-    "Principal"
+    "Principal Back Blue",
+    "Principal Back Red",
+    "Principal Mid Blue",
+    "Principal Mid Red",
+    "Principal Upper Blue",
+    "Principal Upper Red"
   ],
   "autoFolders": [],
   "defaultMaxVel": 2.0,

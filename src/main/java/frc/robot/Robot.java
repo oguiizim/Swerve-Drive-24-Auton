@@ -16,7 +16,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-    CameraServer.startAutomaticCapture();
+    CameraServer.startAutomaticCapture("USB Camera 1", 0);
     m_robotContainer = new RobotContainer();
   }
 
@@ -36,8 +36,6 @@ public class Robot extends TimedRobot {
     m_robotContainer.setMotorBrake(true);
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
-    
-
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
@@ -48,6 +46,9 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+
+    // m_robotContainer.swerve.zeroGyro();
+
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }

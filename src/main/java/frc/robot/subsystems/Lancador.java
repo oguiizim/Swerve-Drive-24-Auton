@@ -28,8 +28,10 @@ public class Lancador extends SubsystemBase {
 
     }
 
+    // Bolata Grande Gira mais rapido
+
     public void shooterMidCollectDown() {
-        lancadorMeio.set(0.6);
+        lancadorMeio.set(0.8);
     }
 
     public void shooterMidCollectUp() {
@@ -46,8 +48,8 @@ public class Lancador extends SubsystemBase {
     }
 
     public void shootAmp() {
-        lancadorUp.set(0.32);
-        lancadorDown.set(0.10);
+        lancadorUp.set(0.40);
+        lancadorDown.set(0.20);
     }
 
     public void shootSpeaker() {
