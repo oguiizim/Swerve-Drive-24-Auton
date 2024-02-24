@@ -46,7 +46,7 @@ public class RobotContainer {
   public RobotContainer() {
 
     NamedCommands.registerCommand("shootSpeaker",
-        new InstantCommand(lSubsystem::shootSpeaker, lSubsystem));
+        new InstantCommand(lSubsystem::shootSpeakerAuto, lSubsystem));
 
     NamedCommands.registerCommand("shootCondutor", new InstantCommand(lSubsystem::shooterMidCollectDown, lSubsystem));
     NamedCommands.registerCommand("stopShooter", new InstantCommand(lSubsystem::stop, lSubsystem));
@@ -121,6 +121,14 @@ public class RobotContainer {
         lSubsystem)).onFalse(Commands.runOnce(
             () -> lSubsystem.stop(),
             lSubsystem));
+
+    // new JoystickButton(controleXbox, XboxController.Button.kB.value).onFalse(Commands.runOnce(
+    //   () -> {
+    //     swerve.slowMode(maximumSpeed);
+    //   }, swerve)).onTrue(Commands.runOnce(
+    //   () -> {
+    //     swerve.fastMode(maximumSpeed);
+    //   }, swerve));
 
   }
 

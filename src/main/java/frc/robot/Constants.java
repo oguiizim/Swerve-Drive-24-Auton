@@ -29,8 +29,8 @@ public final class Constants {
     public static final Matter CHASSIS = new Matter(new Translation3d(xMass, yMass, (zMass)), ROBOT_MASS);
 
     // Máxima aceleração e velocidade
-    public static final double MAX_ACCE_AUTO = 4;
-    public static final double MAX_VEL_AUTO = 4;
+    public static final double MAX_ACCE_AUTO = 4.5;
+    public static final double MAX_VEL_AUTO = 4.5;
 
     // Diâmetro da roda do módulo
     public static final double wheelDiameterInMeters = Units.inchesToMeters(4);

@@ -37,6 +37,8 @@ public class SwerveSubsystem extends SubsystemBase {
   // Objeto global autônomo
   ConfigAuto autonomo;
 
+  public static double maximumSpeed;
+
   // Método construtor da classe
   public SwerveSubsystem(File directory) {
     // Seta a telemetria como nível mais alto
@@ -67,6 +69,14 @@ public class SwerveSubsystem extends SubsystemBase {
     swerveDrive.updateOdometry();
   }
 
+  // public void slowMode(double maximumSpeed){
+  //   swerveDrive.setMaximumSpeed(0.3);
+  // }
+
+  // public void fastMode(double maximumSpeed){
+  //   swerveDrive.setMaximumSpeed(3);
+  // }
+
   // Função drive que chamamos em nossa classe de comando Teleoperado
   public void drive(Translation2d translation, double rotation, boolean fieldRelative) {
     swerveDrive.drive(translation, rotation, fieldRelative, false);
@@ -75,7 +85,6 @@ public class SwerveSubsystem extends SubsystemBase {
   public void zeroGyro() {
     swerveDrive.zeroGyro();
   }
-
 
   // Função para obter a velocidade desejada a partir dos inputs do gamepad
   public ChassisSpeeds getTargetSpeeds(double xInput, double yInput, double headingX, double headingY) {

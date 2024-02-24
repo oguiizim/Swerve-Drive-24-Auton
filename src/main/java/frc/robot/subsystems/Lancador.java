@@ -57,6 +57,11 @@ public class Lancador extends SubsystemBase {
         lancadorDown.set(0.20);
     }
 
+    public void shootSpeakerAuto() {
+        lancadorUp.set(0.65);
+        lancadorDown.set(0.22);
+    }
+
     public void stop() {
         lancadorUp.stopMotor();
         lancadorDown.stopMotor();
