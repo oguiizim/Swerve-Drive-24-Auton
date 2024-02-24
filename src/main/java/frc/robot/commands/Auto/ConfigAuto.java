@@ -30,7 +30,7 @@ public class ConfigAuto {
                 swerve::setChassisSpeeds, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
                 new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your
                                                  // Constants class
-                        new PIDConstants(5.0, 0.0, 0.0),
+                        new PIDConstants(5.5, 0.0, 0.0),
                         // Translation PID constants
                         new PIDConstants(swerve.getSwerveController().config.headingPIDF.p,
                                 swerve.getSwerveController().config.headingPIDF.i,

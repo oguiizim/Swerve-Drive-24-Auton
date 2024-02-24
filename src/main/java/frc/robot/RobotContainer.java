@@ -46,9 +46,9 @@ public class RobotContainer {
   public RobotContainer() {
 
     NamedCommands.registerCommand("shootSpeaker",
-        new InstantCommand(lSubsystem::shootSpeaker, lSubsystem).withTimeout(2));
-        
-    NamedCommands.registerCommand("condutorShoot", new InstantCommand(lSubsystem::shooterMidCollectDown, lSubsystem));
+        new InstantCommand(lSubsystem::shootSpeaker, lSubsystem));
+
+    NamedCommands.registerCommand("shootCondutor", new InstantCommand(lSubsystem::shooterMidCollectDown, lSubsystem));
     NamedCommands.registerCommand("stopShooter", new InstantCommand(lSubsystem::stop, lSubsystem));
     NamedCommands.registerCommand("stopCondutor", new InstantCommand(lSubsystem::stopCondutor, lSubsystem));
     NamedCommands.registerCommand("collect", new InstantCommand(cSubsystem::collect, cSubsystem));
@@ -56,7 +56,9 @@ public class RobotContainer {
 
     // setPoinit positvo = Giro para esquerda
     // setPoint negativo = Giro para direita
-    NamedCommands.registerCommand("gyro-45", new Gyro(swerve, -55));
+    NamedCommands.registerCommand("gyro-60", new Gyro(swerve, -50));
+    NamedCommands.registerCommand("gyro0", new Gyro(swerve, 0.5));
+    NamedCommands.registerCommand("gyro-90", new Gyro(swerve, 90));
 
     swerve.setDefaultCommand(new Teleop(swerve,
         () -> -MathUtil.applyDeadband(controleXbox.getLeftY(), Controle.DEADBAND),

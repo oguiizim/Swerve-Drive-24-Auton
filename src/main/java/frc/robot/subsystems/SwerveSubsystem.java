@@ -11,6 +11,9 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.Dimensoes;
@@ -18,6 +21,7 @@ import frc.robot.Constants.Tracao;
 import frc.robot.commands.Auto.ConfigAuto;
 import swervelib.SwerveController;
 import swervelib.SwerveDrive;
+import swervelib.SwerveModule;
 import swervelib.telemetry.SwerveDriveTelemetry;
 import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
 import swervelib.parser.SwerveDriveConfiguration;
@@ -52,6 +56,10 @@ public class SwerveSubsystem extends SubsystemBase {
 
     autonomo.setupPathPlanner();
   }
+  
+  // public double getAbsolutePosition() {
+  //   return getAbsolutePosition();  
+  // }
 
   @Override
   public void periodic() {
@@ -67,6 +75,7 @@ public class SwerveSubsystem extends SubsystemBase {
   public void zeroGyro() {
     swerveDrive.zeroGyro();
   }
+
 
   // Função para obter a velocidade desejada a partir dos inputs do gamepad
   public ChassisSpeeds getTargetSpeeds(double xInput, double yInput, double headingX, double headingY) {

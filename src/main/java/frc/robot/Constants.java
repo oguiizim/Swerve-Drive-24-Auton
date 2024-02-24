@@ -29,8 +29,8 @@ public final class Constants {
     public static final Matter CHASSIS = new Matter(new Translation3d(xMass, yMass, (zMass)), ROBOT_MASS);
 
     // Máxima aceleração e velocidade
-    public static final double MAX_ACCE_AUTO = 2;
-    public static final double MAX_VEL_AUTO = 2.5;
+    public static final double MAX_ACCE_AUTO = 4;
+    public static final double MAX_VEL_AUTO = 4;
 
     // Diâmetro da roda do módulo
     public static final double wheelDiameterInMeters = Units.inchesToMeters(4);
@@ -52,9 +52,9 @@ public final class Constants {
 
   public static final class PID {
     // PID para frente e para trás
-    public static final PIDFConfig xAutoPID = new PIDFConfig(1.2, 0, 0);
+    public static final PIDFConfig xAutoPID = new PIDFConfig(1.52, 0, 0);
     // PID para esquerda e direita
-    public static final PIDFConfig yAutoPID = new PIDFConfig(1.2, 0, 0);
+    public static final PIDFConfig yAutoPID = new PIDFConfig(1.52, 0, 0);
     // PID de rotação
     public static final PIDFConfig angleAutoPID = new PIDFConfig(2.3, 0, 0);
   }
