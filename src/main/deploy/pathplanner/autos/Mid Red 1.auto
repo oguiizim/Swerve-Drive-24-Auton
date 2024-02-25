@@ -1,0 +1,145 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.94,
+      "y": 3.9
+    },
+    "rotation": 0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "gyro54"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "shootSpeaker"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "shootCondutor"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.25
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "stopShooter"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "stopCondutor"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "gyro0"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Mid Red 1"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "stopIntake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Mid Red 2"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "collect"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "shootCondutor"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.25
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "stopShooter"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "stopCondutor"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "stopIntake"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "gyro0"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Mid Red 3"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}

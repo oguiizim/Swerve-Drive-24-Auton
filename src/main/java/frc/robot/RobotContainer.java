@@ -57,8 +57,10 @@ public class RobotContainer {
     // setPoinit positvo = Giro para esquerda
     // setPoint negativo = Giro para direita
     NamedCommands.registerCommand("gyro-60", new Gyro(swerve, -50));
+    NamedCommands.registerCommand("gyro54", new Gyro(swerve, 54));
     NamedCommands.registerCommand("gyro0", new Gyro(swerve, 0.5));
-    NamedCommands.registerCommand("gyro-90", new Gyro(swerve, 90));
+    NamedCommands.registerCommand("gyro90", new Gyro(swerve, 90));
+    NamedCommands.registerCommand("gyro-90", new Gyro(swerve, -90));
 
     swerve.setDefaultCommand(new Teleop(swerve,
         () -> -MathUtil.applyDeadband(controleXbox.getLeftY(), Controle.DEADBAND),
@@ -122,13 +124,14 @@ public class RobotContainer {
             () -> lSubsystem.stop(),
             lSubsystem));
 
-    // new JoystickButton(controleXbox, XboxController.Button.kB.value).onFalse(Commands.runOnce(
-    //   () -> {
-    //     swerve.slowMode(maximumSpeed);
-    //   }, swerve)).onTrue(Commands.runOnce(
-    //   () -> {
-    //     swerve.fastMode(maximumSpeed);
-    //   }, swerve));
+    // new JoystickButton(controleXbox,
+    // XboxController.Button.kB.value).onFalse(Commands.runOnce(
+    // () -> {
+    // swerve.slowMode(maximumSpeed);
+    // }, swerve)).onTrue(Commands.runOnce(
+    // () -> {
+    // swerve.fastMode(maximumSpeed);
+    // }, swerve));
 
   }
 
