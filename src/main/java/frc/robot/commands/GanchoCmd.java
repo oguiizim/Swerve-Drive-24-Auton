@@ -19,6 +19,7 @@ public class GanchoCmd extends Command{
 
     @Override
     public void initialize(){
+        gancho.pararGarra();
     }
 
     @Override

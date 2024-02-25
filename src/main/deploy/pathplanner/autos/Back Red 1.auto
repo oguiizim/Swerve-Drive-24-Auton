@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.4,
-      "y": 5.55
+      "x": 0.94,
+      "y": 3.9
     },
     "rotation": 0
   },
@@ -14,13 +14,19 @@
         {
           "type": "named",
           "data": {
+            "name": "gyro54"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
             "name": "shootSpeaker"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.8
+            "waitTime": 1.0
           }
         },
         {
@@ -32,7 +38,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.4
+            "waitTime": 0.25
           }
         },
         {
@@ -48,15 +54,21 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "gyro0"
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "Mid Red 1"
+            "pathName": "Back Red 1"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.5
+            "waitTime": 1.0
           }
         },
         {
@@ -68,61 +80,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Mid Red 2"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.75
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "shootCondutor"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "stopCondutor"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "stopShooter"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Mid Red 3"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.75
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "stopIntake"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Mid Red 4"
+            "pathName": "Back Red 2"
           }
         },
         {
@@ -146,7 +104,7 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.5
+            "waitTime": 0.25
           }
         },
         {
@@ -165,6 +123,18 @@
           "type": "named",
           "data": {
             "name": "stopIntake"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "gyro0"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Back Red 3"
           }
         }
       ]

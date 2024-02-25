@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.4,
-        "y": 5.55
+        "x": 2.45,
+        "y": 3.84
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.3999999999999995,
-        "y": 5.55
+        "x": 2.5500000000000003,
+        "y": 3.84
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 3.2,
-        "y": 5.55
+        "x": 0.89,
+        "y": 3.95
       },
       "prevControl": {
-        "x": 2.2,
-        "y": 5.55
+        "x": 0.99,
+        "y": 3.95
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,8 +32,8 @@
   "constraintZones": [],
   "eventMarkers": [
     {
-      "name": "collect",
-      "waypointRelativePos": 0.3,
+      "name": "shoot",
+      "waypointRelativePos": 0,
       "command": {
         "type": "sequential",
         "data": {
@@ -41,7 +41,7 @@
             {
               "type": "named",
               "data": {
-                "name": "collect"
+                "name": "shootSpeaker"
               }
             }
           ]
@@ -57,7 +57,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": -49.0,
     "rotateFast": false
   },
   "reversed": false,
